@@ -1,0 +1,41 @@
+### GENERAL SETTINGS ###
+
+# Site settings
+title: The Penrose Library
+description: "Package Library for Penrose"
+baseurl: "" #important, if defined, start with /
+url: ""
+
+# Build settings
+markdown: kramdown
+permalink: /:categories/:title
+excerpt_separator: <!--more-->
+
+colors:  #in hex code if not noted else
+  primary: "#e32929"
+  primary_rgb: "247,0,49" #rgb of the primary. Needed in some places for the transparency effect.
+  secondary: "#F7F7F7"
+  link: "#e32929"
+  link_hover: "#01b2fe"
+  footer_heading: "#777"
+  footer_content: "#bfc9d3"
+
+# Making projects separate from posts
+collections:
+  library:
+    output: true
+    permalink: /:path/
+
+defaults:
+  -
+    scope:
+      path: ""
+      type: "pages"
+    values:
+      layout: "page"
+
+github: https://www.github.com/penrose-lib
+maintainer: "@vsoch"
+social:
+  - title: twitter
+    url: https://www.twitter.com/vsoch

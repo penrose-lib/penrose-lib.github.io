@@ -1,0 +1,12 @@
+---
+title: Penrose Library API
+layout: none
+---
+
+{   
+    "selflink": "{{ site.url }}{{ site.baseurl }}/api.json",
+    "library": "{{ site.url }}{{ site.baseurl }}/library.json",
+    "dsl": "{{ site.url }}{{ site.baseurl }}/dsl.json",
+    "sub": "{{ site.url }}{{ site.baseurl }}/sub.json",
+    "sty": "{{ site.url }}{{ site.baseurl }}/sty.json"
+}

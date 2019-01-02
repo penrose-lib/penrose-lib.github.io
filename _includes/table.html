@@ -1,0 +1,168 @@
+<style>
+.fixed-table-toolbar {
+   background:#03a9f4 !important;
+}
+.label-primary {
+   background-color: #03a9f4 !important;
+}
+</style>
+<div class="wrapper">
+    <div class="fresh-table toolbar-color-blue full-screen-table">
+    <!--Available colors for the full background: full-color-blue, full-color-azure, full-color-green, full-color-red, full-color-orange
+Available colors only for the toolbar: toolbar-color-blue, toolbar-color-azure, toolbar-color-green, toolbar-color-red, toolbar-color-orange-->        
+        <div class="toolbar">
+            <span style="float:left">
+            <a href="https://penrose.github.io">
+                <img src="https://penrose.github.io/assets/img/penrose-logo.png" 
+                     style="width:50px; margin-right:30px;float:left"></a></span>
+            <button id="downloadBtn" class="btn btn-default">Download</button>
+            <button id="jsonBtn" class="btn btn-default"><i class="fa fa-code"></i></button>
+            <button id="docsBtn" class="btn btn-default"><i class="fa fa-book"></i></button>
+            <span style="color:white;margin-left:100px" id="message"></span>
+        </div>
+        <table id="fresh-table" class="table">
+           <thead>
+             <th data-field="state" data-checkbox="true" data-formatter="stateFormatter"></th>
+             <th data-field="github" data-sortable="true">github</th>
+             <th data-field="package-id" data-sortable="true">id</th>
+             <th data-field="component-type">type</th>
+             <th data-field="tags" data-sortable="false">tags</th>
+             <th data-field="maintainer" data-sortable="true">maintainer</th>
+          </thead>
+              <tbody>
+                {% for package in site.library %}
+                  <tr data-name="{{ package.name }}" data-github="{{ package.github }}">
+                    <td data-id="{{ package.name }}-checkbox"></td>
+                    <td>
+                        <a href="{{ package.github }}" target="_blank">
+                           <span class="btn btn-xs btn-info">GITHUB</span>
+                       </a>
+                    </td>
+                    <td><a href="{{ site.url }}{{ site.baseurl }}{{ package.url }}">{{ package.name }}</a></td>
+                    <td><img src="{{ site.url }}{{ site.baseurl }}/assets/img/{% if package.path contains '/dsl/' %}dsl{% endif %}{% if package.path contains '/sty/' %}sty{% endif %}{% if package.path contains '/sub/' %}sub{% endif %}.svg" width="50px"></td>
+                    <td>{% for tag in package.tags %}{{ tag }}{% if forloop.last %}{% else %}, {% endif %}{% endfor %}</td>
+                    <td>{{ package.maintainer }}</td>
+                </tr>
+                {% endfor %}
+              </tbody>
+          </table>
+    </div>
+</div>    
+
+<script type="text/javascript" src="assets/js/bootstrap.js"></script>
+<script type="text/javascript" src="assets/js/bootstrap-table.js"></script>
+        
+<script type="text/javascript">
+        var $table = $('#fresh-table'),
+            $downloadBtn = $('#downloadBtn'), 
+            $jsonBtn = $('#jsonBtn'), 
+            $docsBtn = $('#docsBtn'), 
+            full_screen = false,
+            window_height;
+            
+        $().ready(function(){
+            
+            window_height = $(window).height();
+            table_height = window_height - 20;
+            
+            $table.bootstrapTable({
+                toolbar: ".toolbar",
+
+                showRefresh: false,
+                search: true,
+                showToggle: true,
+                showColumns: true,
+                pagination: true,
+                striped: false,
+                sortable: true,
+                height: table_height,
+                pageSize: 100,
+                pageList: [25,50,100,150,200],
+                
+                formatShowingRows: function(pageFrom, pageTo, totalRows){
+                    //do nothing here, we don't want to show the text "showing x of y from..." 
+                },
+                formatRecordsPerPage: function(pageNumber){
+                    return pageNumber + " rows visible";
+                },
+                icons: {
+                    refresh: 'fa fa-refresh',
+                    toggle: 'fa fa-list',
+                    columns: 'fa fa-columns',
+                    detailOpen: 'fa fa-plus-circle',
+                    detailClose: 'fa fa-minus-circle'
+                }
+            });
+
+            $jsonBtn.click(function () {
+                document.location = "{{ site.baseurl }}/library.json";
+            });
+
+            $docsBtn.click(function () {
+                document.location = "{{ site.baseurl }}/docs/";
+            });
+
+            $downloadBtn.click(function () {
+
+                alert("I don't know what this means yet!");
+                //document.location = "{{ site.baseurl }}/generate";
+
+            });
+                                     
+            $(window).resize(function () {
+                $table.bootstrapTable('resetView');
+            });    
+        });
+        
+    $(document).ready(function(){
+         $(".glyphicon").removeClass('glyphicon');
+
+         // Load Selected
+         if (localStorage.getItem("penrose-packages") === null) {  
+             $("#message").text('0 packages selected')
+             $("#downloadBtn").attr('disabled', true);
+         } else if (localStorage.getItem("penrose-packages") === "") {
+             $("#message").text('0 packages selected')
+             $("#downloadBtn").attr('disabled', true)
+         } else if (localStorage.getItem("penrose-packages") === "{}") {
+             $("#message").text('0 packages selected')
+             $("#downloadBtn").attr('disabled', true)
+         } else {
+             packages = JSON.parse(localStorage.getItem('penrose-packages'));
+             var length = Object.keys(packages).length;
+             $("#message").text(length +' packages selected')
+             $.each( packages, function( name, github ) {
+               $('[data-name="' + name + '"] :checkbox').attr('checked',true);
+             $("#downloadBtn").attr('disabled', false)
+
+           });
+        }
+        
+        // Update selected recipes 
+        // STOPPED HERE - update code, continue
+        $("#fresh-table").contents().find(":checkbox").bind('change', function(){        
+
+            var packages = new Object();
+            var checked = $('.selected');
+            if (checked.length > 0) {
+               $("#downloadBtn").attr('disabled', false)
+            } else {
+               $("#downloadBtn").attr('disabled', true)
+            }
+            $.each(checked, function(i,e){
+               var row = $('tr[data-index="'+ $(this).attr('data-index') + '"]')
+               var package_id = $(row).attr('data-name')
+               var package_github = $(row).attr('data-github')
+               console.log("Adding " + package_id);
+               packages[package_id] = exp_github;
+            })
+
+            console.log(packages);
+            localStorage.setItem('penrose-packages',JSON.stringify(packages))
+             var length = Object.keys(packages).length;
+             $("#message").text(length +' packages selected')
+
+        });
+
+    })
+    </script>

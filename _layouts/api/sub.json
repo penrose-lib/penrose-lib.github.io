@@ -1,0 +1,14 @@
+---
+title: Penrose Library SUB
+layout: none
+---
+
+[{% for package in site.library %}{% if package.path contains '/sub/' %}
+    {
+        "name": "{{ package.name }}",
+        "github": "{{ package.github }}",
+        "type": "sub"
+        "maintainer": "{{ package.maintainer }}",
+        {% if package.tags %}"tags": [{% for tag in package.tags %}"{{ tag }}"{% if forloop.last %}{% else %},{% endif %}{% endfor %}]{% endif %}{% endif %}
+  }{% if forloop.last %}{% else %},{% endif %}
+{% endfor %}]

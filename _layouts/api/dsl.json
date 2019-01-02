@@ -1,0 +1,14 @@
+---
+title: Penrose Library DSL
+layout: none
+---
+
+[{% for package in site.library %}{% if package.path contains '/dsl/' %}
+    {
+        "name": "{{ package.name }}",
+        "github": "{{ package.github }}",
+        "type": "dsl"
+        "maintainer": "{{ package.maintainer }}",
+        {% if package.tags %}"tags": [{% for tag in package.tags %}"{{ tag }}"{% if forloop.last %}{% else %},{% endif %}{% endfor %}]{% endif %}{% endif %}
+  }{% if forloop.last %}{% else %},{% endif %}
+{% endfor %}]
