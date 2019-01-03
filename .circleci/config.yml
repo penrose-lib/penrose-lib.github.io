@@ -14,18 +14,21 @@ jobs:
       - checkout
       - restore_cache:
           keys:
-            - rubygems-v1-{{ checksum "Gemfile.lock" }}
+            - rubygems-v1-{{ checksum "Gemfile" }}
             - rubygems-v1-fallback
       - run:
           name: Bundle Install
           command: bundle check || bundle install
       - save_cache:
-          key: rubygems-v1-{{ checksum "Gemfile.lock" }}
+          key: rubygems-v1-{{ checksum "Gemfile" }}
           paths:
             - vendor/bundle
+      - run:
+          name: Fix CircleCI URLs
+          command: cd .circleci && /bin/bash urls.sh
       - run:
           name: Jekyll build
           command: bundle exec jekyll build
       - store_artifacts:
           path: ./_site
-          destination: html
+          destination: _site
