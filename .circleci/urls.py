@@ -10,9 +10,9 @@ here = os.path.abspath(os.path.dirname(os.path.dirname(__file__)))
 
 print('Working directory is %s' % here)
 
-files = glob('%s/_layouts/*.html' % here) +
-        glob('%s/_includes/*.html' % here) +
-        glob('%s/pages/*.md' % here)
+files = (glob('%s/_layouts/*.html' % here) +
+         glob('%s/_includes/*.html' % here) +
+         glob('%s/pages/*.md' % here))
 
 # https://circleci.com/docs/2.0/env-vars/#built-in-environment-variables
 running_ci = os.environ.get('CI', False)
