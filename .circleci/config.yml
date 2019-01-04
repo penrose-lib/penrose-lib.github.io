@@ -24,6 +24,9 @@ jobs:
           paths:
             - vendor/bundle
       - run:
+          name: Removed Cached Site
+          command: rm -rf /home/circleci/repo/_site
+      - run:
           name: Fix CircleCI URLs
           command: cd .circleci && python urls.py /home/circleci/repo
       - run:
