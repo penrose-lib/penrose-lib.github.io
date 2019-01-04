@@ -621,7 +621,7 @@ code {
   padding: 15px 15px 0;
 }
 
-#content .body code {
+#content .body {
   border: 1px solid #e2e7ea;
   background: #eef1f2;
   border-radius: 2px;
