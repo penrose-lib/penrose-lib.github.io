@@ -39,7 +39,7 @@ Available colors only for the toolbar: toolbar-color-blue, toolbar-color-azure, 
                        </a>
                     </td>
                     <td><a href="{{ site.url }}{{ site.baseurl }}{{ package.url }}">{{ package.name }}</a></td>
-                    <td><img src="{{ site.url }}{{ site.baseurl }}/assets/img/{% if package.path contains '/dsl/' %}dsl{% endif %}{% if package.path contains '/sty/' %}sty{% endif %}{% if package.path contains '/sub/' %}sub{% endif %}.svg" width="50px"></td>
+                    <td><img src="{{ site.url }}{{ site.baseurl }}assets/img/{% if package.path contains '/dsl/' %}dsl{% endif %}{% if package.path contains '/sty/' %}sty{% endif %}{% if package.path contains '/sub/' %}sub{% endif %}.svg" width="50px"></td>
                     <td>{% for tag in package.tags %}{{ tag }}{% if forloop.last %}{% else %}, {% endif %}{% endfor %}</td>
                     <td>{{ package.maintainer }}</td>
                 </tr>
