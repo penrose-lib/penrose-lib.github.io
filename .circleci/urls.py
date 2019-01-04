@@ -7,7 +7,7 @@ import sys
 here = sys.argv[1]
 
 # A quick script to fix urls for circle
-baseurl="https://6-163772993-gh.circle-artifacts.com/0/_site"
+baseurl="https://6-163772993-gh.circle-artifacts.com/0/_site/"
 
 print('Working directory is %s' % here)
 
