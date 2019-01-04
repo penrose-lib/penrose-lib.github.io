@@ -25,7 +25,7 @@ jobs:
             - vendor/bundle
       - run:
           name: Fix CircleCI URLs
-          command: cd .circleci && python urls.py
+          command: cd .circleci && python urls.py /home/circleci/repo
       - run:
           name: Jekyll build
           command: bundle exec jekyll build
