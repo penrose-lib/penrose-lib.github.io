@@ -24,13 +24,13 @@ if running_ci in ['true', True]:
 
     for file_name in files:
 
-        print('Fixing URL in %s' % file_name)
+        print('Fixing URLs in %s' % file_name)
         # 1. Read in the file
         with open(file_name, 'r') as filey:
             content = filey.read()
 
         # 2. Replace with the actual baseurl
-        content = content.replace('{{ site.uri }}', baseurl)
+        content = content.replace('{{ site.url }}', baseurl)
 
         # 3. Save the file
         with open(file_name, 'w') as filey:
