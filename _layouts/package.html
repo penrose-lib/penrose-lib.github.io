@@ -22,7 +22,7 @@ layout: default
             <p><b>Type:</b>{% if page.path contains '/dsl/' %}dsl{% endif %}{% if page.path contains '/sty/' %}sty{% endif %}{% if page.path contains '/sub/' %}sub{% endif %}</p>
             <p><b>Maintainer</b> {{ page.maintainer }}</p>
             <p><b>Tags:</b>{% for tag in page.tags %} {{ tag }}{% if forloop.last %}{% else %}, {% endif %}{% endfor %}</p>
-            <p style="padding-top:15px"><a href="{{ page.github }}" target="_blank">
+            <p style="padding-top:15px"><a href="https://www.github.com/{{ page.github }}" target="_blank">
                            <button class="btn btn-sm btn-primary"
                                    style="color: #03a9f4; border-color:#03a9f4">GITHUB</button></a></p>
         </div>
