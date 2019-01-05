@@ -5,8 +5,8 @@ layout: none
 
 [{% for package in site.library %}
     {
-        "name": "{{ package.name }}",
-        "github": "{{ package.github }}",
+        "name": "{{ package.github }}",
+        "github": "https://www.github.com/{{ package.github }}",
         "type": "{% if package.path contains '/dsl/' %}dsl{% endif %}{% if package.path contains '/sty/' %}sty{% endif %}{% if package.path contains '/sub/' %}sub{% endif %}"
         "maintainer": "{{ package.maintainer }}",
         {% if package.tags %}"tags": [{% for tag in package.tags %}"{{ tag }}"{% if forloop.last %}{% else %},{% endif %}{% endfor %}]{% endif %}
