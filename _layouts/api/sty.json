@@ -10,5 +10,5 @@ layout: none
         "type": "sty"
         "maintainer": "{{ package.maintainer }}",
         {% if package.tags %}"tags": [{% for tag in package.tags %}"{{ tag }}"{% if forloop.last %}{% else %},{% endif %}{% endfor %}]{% endif %}{% endif %}
-  }{% if forloop.last %}{% else %},{% endif %}
+  {}{% if forloop.last %}{% else %},{% endif %}
 {% endfor %}]
