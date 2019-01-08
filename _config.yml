@@ -4,7 +4,9 @@
 title: The Penrose Library
 description: "Package Library for Penrose"
 baseurl: "" #important, if defined, start with /
-url: ""
+repo: https://www.github.com/penrose-lib
+github_pages: https://penrose-lib.github.io
+url: "https://penrose-lib.github.io"
 
 # Build settings
 markdown: kramdown
@@ -34,7 +36,6 @@ defaults:
     values:
       layout: "page"
 
-github: https://www.github.com/penrose-lib
 maintainer: "@vsoch"
 social:
   - title: twitter
